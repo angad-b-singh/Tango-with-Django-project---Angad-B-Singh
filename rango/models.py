@@ -7,16 +7,19 @@ class Category(models.Model):
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
-
+    
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = self.name.replace(' ', '-')
         super(Category, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name_plural = 'Categories'
-
+    
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = 'Categories'
+        
+    def get_absolute_url(self):
+        return reverse('rango:show_category', kwargs={'category_name_slug': self.slug})
 
 
 class Page(models.Model):
@@ -24,6 +27,9 @@ class Page(models.Model):
     title = models.CharField(max_length=128)
     url = models.URLField()
     views = models.IntegerField(default=0)
-
+    likes = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True)
+    
     def __str__(self):
         return self.title
+
