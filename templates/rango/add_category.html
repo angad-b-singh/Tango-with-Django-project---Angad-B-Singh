@@ -8,7 +8,7 @@
     <h1>Add a Category</h1>
     
     {% if category_saved %}
-        <strong>{{ category.name }} was saved successfully!</strong><br/>
+        <strong>Category saved successfully!</strong><br/>
         <a href="/rango/add_category/">Add another?</a>
     {% else %}
         <form id="category_form" method="post" action="/rango/add_category/">
