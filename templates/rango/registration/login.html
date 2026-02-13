@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Login to Rango</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post" action="{% url 'django.contrib.auth.views:login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <br/>
+    <a href="{% url 'rango:index' %}">Rango index</a>
+</body>
+</html>
